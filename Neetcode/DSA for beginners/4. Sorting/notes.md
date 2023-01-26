@@ -60,3 +60,41 @@ put the pivot where the pointer ended
 
 ## Quick Sort
 
+common sorting algo and simmilary to merge sort
+
+pick a random value and pick the right most value to be the pivot value
+
+iterate every value before the pivot value and compare that value to the pivot and every value less than the pivot is partiioned to the left
+
+every value greater than or equal to the pivot is partinioed to the right
+
+1 pointer will help iterate array and the next pointer will help the next value
+
+just becauase they are partioned doesnt mean they are sorted
+
+the next step is recursive
+
+worst case n^2
+
+on average the height is logn and nlogn will be time complexity
+
+Quick sort is not a stable algo - does not preserver the order of values in a tie
+
+on average O(nlogN)
+
+
+## Bucket sort
+
+It can be run in O(n) in the worst case
+
+very efficient algo
+
+Bucket sort is rearely used
+
+only allow to use bucketsort if all the values you are sorting are in a finite range
+
+create a bucket for every value
+
+unstable and is O(n) worst time
+
+
