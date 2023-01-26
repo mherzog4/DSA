@@ -176,3 +176,57 @@ BFS goes layer by layer
 
 ## Breadth-first search
 
+Instead of going for depth you go wide and go layer by layer
+
+go left to right in trees
+
+print the root node and go to next left node
+
+this algo doesnt suite recursion well - do this algo iteratively
+
+after processes a node print the children of the node
+
+implement a queue - first in first out
+
+``` python
+from collections import deque
+
+def bfs(root):
+    queue = dequue()
+
+    if root:
+        queue.append(root)
+
+    level = 0
+    while len(queue) > 0:
+        print("level: ", level)
+        for i in range (lef(queue)):
+            curr = queue.popleft()
+            print(curr.val)
+            if curr.left:
+                queue.append(curr.left)
+            if curr.right:
+                queue.append(curr.right)
+        level += 1
+```
+
+## BST Sets and Maps
+
+sets and maps are common with binary search trees
+
+a set is similiar to an array
+
+can insert and remove values in logn time
+
+Maps
+
+lke a phonebook A-Z and every name is mapped to other contact info (phone #)
+
+Key Value pairing
+
+the data structure is sorted by the key
+
+BST is the underlying data structure of sets and maps
+
+Python doesnt have native tree maps
+
