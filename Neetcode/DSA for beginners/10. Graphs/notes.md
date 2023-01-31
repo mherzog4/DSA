@@ -107,5 +107,134 @@ def dfs(grid, r, c, visit):
 
 ## Matrix BFS
 
+```python
+from collections import deque
+
+# Matrix (2D Grid)
+grid = [[0, 0, 0, 0],
+        [1, 1, 0, 0],
+        [0, 0, 0, 1],
+        [0, 1, 0, 0]]
+
+# Shortest path from top left to bottom right
+def bfs(grid):
+    ROWS, COLS = len(grid), len(grid[0])
+    visit = set()
+    queue = deque()
+    queue.append((0, 0))
+    visit.add((0, 0))
+
+    length = 0
+    while queue:
+        for i in range(len(queue)):
+            r, c = queue.popleft()
+            if r == ROWS - 1 and c == COLS - 1:
+                return length
+
+            neighbors = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+            for dr, dc in neighbors:
+                if (min(r + dr, c + dc) < 0 or
+                    r + dr == ROWS or c + dc == COLS or
+                    (r + dr, c + dc) in visit or grid[r + dr][c + dc] == 1):
+                    continue
+                queue.append((r + dr, c + dc))
+                visit.add((r + dr, c + dc))
+        length += 1
+
+print(bfs(grid))
+```
+
+this pattern is common  with the shortest path algo
+
+
+
+
 ## Adjacency List
 
+theres are more simpler to run an algo on than a matrix
+
+in coding interviews its more common to use a hashmap to represent an adjacency list - because the value/id of each id when it is unique and the value is a list and the list represent the neighbors
+
+src is the first in the pair
+
+dst is the second in the pair
+
+want to make sure every node is added to the adjancency list
+
+for the adjacency list of the src (a) append the neighbors(b)
+
+A points to B
+
+B has already been added to adjacnency list but C has not
+
+you can run BFS and DFS on this
+
+Graphs come up a ton in coding interviews
+
+what if the edges have a different lengths
+
+
+
+
+```python
+from collections import deque
+
+# GraphNode used for adjacency list
+class GraphNode:
+    def __init__(self, val):
+        self.val = val
+        self.neighbors = []
+
+# Or use a HashMap
+adjList = { "A": [], "B": [] }
+
+# Given directed edges, build an adjacency list
+edges = [["A", "B"], ["B", "C"], ["B", "E"], ["C", "E"], ["E", "D"]]
+
+adjList = {}
+
+for src, dst in edges:
+    if src not in adjList:
+        adjList[src] = []
+    if dst not in adjList:
+        adjList[dst] = []
+    adjList[src].append(dst)
+
+
+# Count paths (backtracking)
+def dfs(node, target, adjList, visit):
+    if node in visit:
+        return 0
+    if node == target:
+        return 1
+    
+    count = 0
+    visit.add(node)
+    for neighbor in adjList[node]:
+        count += dfs(neighbor, target, adjList, visit)
+    visit.remove(node)
+
+    return count
+
+# Shortest path from node to target
+def bfs(node, target, adjList):
+    length = 0
+    visit = set()
+    visit.add(node)
+    queue = deque()
+    queue.append(node)
+
+    while queue:
+        for i in range(len(queue)):
+            curr = queue.popleft()
+            if curr == target:
+                return length
+
+            for neighbor in adjList[curr]:
+                if neighbor not in visit:
+                    visit.add(neighbor)
+                    queue.append(neighbor)
+        length += 1
+    return length
+
+```
